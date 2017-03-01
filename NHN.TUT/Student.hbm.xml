@@ -1,0 +1,28 @@
+﻿<?xml version = "1.0" encoding = "utf-8" ?>
+
+<hibernate-mapping xmlns = "urn:nhibernate-mapping-2.2"
+   assembly = "NHibernateDemoApp" namespace = "NHibernateDemoApp">
+
+  <class name = "Student">
+    <id name = "Id">
+     <generator class = "native"/>
+<!-- <generator class = "guid.comb"/> <!- making database responsible for generating id (remove id when creating ticket) -->
+    </id>
+
+    <property name = "LastName"/>
+    <property name = "FirstName" column="FirstMidName" type="String"/>
+    <property name="AcademicStanding" />
+
+    <!-- Address needs to be mapped as a component with the different properties because Location 
+         class is seperate class and Location class object is defined in the student class. 
+         With this information NHibernate has enough information to actually map it.-->
+    <component name="Address">
+      <property name= "Street" />
+      <property name= "City" />
+      <property name= "Province" />
+      <property name= "Country" />
+    </component>
+    
+  </class>
+
+</hibernate-mapping>

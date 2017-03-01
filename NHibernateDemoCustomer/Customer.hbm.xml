@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns = "urn:nhibernate-mapping-2.2" assembly="NHibernateDemoCustomer" namespace="NHibernateDemoCustomer">
+  <!--Properties: Build action has to be put to "Embedded resources"-->
+
+  <class name = "Customer">
+
+    <id name="Id">
+      <generator class="guid.comb" />
+    </id>
+
+    <property name="FirstName" />
+    <property name="LastName" />
+    <property name="AverageRating" />
+    <property name="Points" />
+    <property name="HasGoldStatus" />
+    <property name="MemberSince" type="UtcDateTime" />
+    <property name="CreditRating" type="CustomerCreditRating" />
+
+    <component name="Address">
+      <property name="Street" />
+      <property name="City" />
+      <property name="Province" />
+      <property name="Country" />
+    </component>
+
+    <set name="Orders" table="`Order`" cascade="all-delete-orphan" 
+         inverse ="true"> <!-- Like this we tell NHibernate that the relationship customer-order is actualy the same
+                                relationship as order-customer >> no duplicate update will be done on the db of the foreign key 
+                                because it is being updated when the orders are being saved. Always set from the child item; many-to-many relationship: doensn't matter-->
+      <!-- fetch="join"> -->    <!-- NHibernate will go to db once instead of twice by using a left outer join -->
+      <key column="CustomerId"/>
+      <one-to-many class="Order"/>
+    </set>
+    
+  </class>
+</hibernate-mapping>
