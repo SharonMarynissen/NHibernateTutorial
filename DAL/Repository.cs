@@ -18,6 +18,7 @@ namespace DAL
         public Repository()
         {
             Configuration cfg = new Configuration();
+            cfg.Configure();
             cfg.AddAssembly(Assembly.GetExecutingAssembly());
             Session = cfg.BuildSessionFactory().OpenSession();
         }

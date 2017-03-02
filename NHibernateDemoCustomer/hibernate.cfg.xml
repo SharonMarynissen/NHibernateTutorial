@@ -14,6 +14,6 @@
 
     <!-- <property name="show_sql">true</property> -->   <!--To show sql statements in console-->
 
-    <!-- <mapping assembly="NHibernateDemoCustomer"/> -->
+    <mapping assembly="DAL.Mapping"/>
   </session-factory>
 </hibernate-configuration>
